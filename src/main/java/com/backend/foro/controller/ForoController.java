@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ForoController {
 	
 	//Variables iniciales
@@ -45,13 +48,15 @@ public class ForoController {
                 post = objectMapper.readValue(resourceAsStream, Post.class);
                 
                 // Asigna IDs a los comentarios si aún no tienen
-                asignarId(post.getComentarios());
+                asignarId(post.getUsuarios().get(0).getComentarios());
             } else {
                 post = new Post();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            post = new Post();
+            //e.printStackTrace();
+            //post = new Post();
+        	
+        	throw new RuntimeException("Error al cargar datos desde JSON", e);
         }
     }
     
@@ -81,7 +86,8 @@ public class ForoController {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(Paths.get(JSON_FILE_PATH).toFile(), post);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+        	throw new RuntimeException("Error al guardar datos en JSON", e);
         }
     }
     
@@ -95,11 +101,13 @@ public class ForoController {
     //GET by ID
     @ApiOperation(value = "Obtener comentario por ID", response = Comentario.class)
     @RequestMapping(value = "/post/comentario/{id}", method = RequestMethod.GET)
-    public Comentario obtenerComentarioPorId(@PathVariable String id) {
-        return post.getComentarios().stream()
+    public ResponseEntity<Comentario> obtenerComentarioPorId(@PathVariable String id) {
+        return post.getUsuarios().stream()
+        		.flatMap(usuario -> usuario.getComentarios().stream())
                 .filter(comentario -> comentario.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
     
     //POST
@@ -107,7 +115,7 @@ public class ForoController {
     @RequestMapping(value = "/post/comentario", method = RequestMethod.POST)
     public String agregarComentario(@RequestBody Comentario comentario) {
         comentario.setId(generarIdUnico());
-        post.getComentarios().add(comentario);
+        post.getUsuarios().get(0).getComentarios().add(comentario);
         
         guardarDatosEnJSON();
         return "Comentario agregado exitosamente";
@@ -117,7 +125,7 @@ public class ForoController {
     @ApiOperation(value = "Actualizar comentario por ID", response = String.class)
     @RequestMapping(value = "/post/comentario/{id}", method = RequestMethod.PUT)
     public String actualizarComentario(@PathVariable String id, @RequestBody Comentario comentario) {
-        for (Comentario c : post.getComentarios()) {
+        for (Comentario c : post.getUsuarios().get(0).getComentarios()) {
         	//Si el ID existe
             if (c.getId().equals(id)) {
                 c.setContenido(comentario.getContenido());
@@ -129,15 +137,18 @@ public class ForoController {
                 return "Comentario actualizado exitosamente";
             }
         }
-        return "Comentario no encontrado";
+        return "Comentario no actualizado";
     }
     
     //DELETE
     @ApiOperation(value = "Eliminar comentario por ID", response = String.class)
     @RequestMapping(value = "/post/comentario/{id}", method = RequestMethod.DELETE)
     public String eliminarComentario(@PathVariable String id) {
-        post.getComentarios().removeIf(comentario -> comentario.getId().equals(id));
-        guardarDatosEnJSON();
-        return "Comentario eliminado exitosamente";
+    	if (post.getUsuarios().get(0).getComentarios().removeIf(comentario -> comentario.getId().equals(id))) {
+            guardarDatosEnJSON();
+            return "Comentario eliminado exitosamente";
+        } else {
+            return "Comentario no eliminado";
+        }
     }
 }

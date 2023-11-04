@@ -1,59 +1,81 @@
 {
-  "usuario": {
-    "nombre": "Usuario123",
-    "imagen": "https://ejemplo.com/imagen_usuario.jpg"
-  },
-  "comentarios": [
-    {
-      "id": "ID1636958582416",
-      "contenido": "¡Esto es un gran post!",
-      "fecha_publicacion": "2023-11-02",
-      "hora_publicacion": "12:30:00",
-      "likes": 10,
-      "subcomentarios": [
+    "usuarios": [
         {
-          "id": "ID1636958676511",
-          "usuario": {
-            "nombre": "Comentador456",
-            "imagen": "https://ejemplo.com/imagen_comentador.jpg"
-          },
-          "contenido": "Estoy de acuerdo, ¡muy informativo!",
-          "fecha_publicacion": "2023-11-02",
-          "hora_publicacion": "13:00:00",
-          "likes": 5,
-          "subcomentarios": [
-            {
-              "id": "ID1636958713831",
-              "usuario": {
-                "nombre": "Usuario123",
-                "imagen": "https://ejemplo.com/imagen_usuario.jpg"
-              },
-              "contenido": "¡Gracias por tu comentario!",
-              "fecha_publicacion": "2023-11-02",
-              "hora_publicacion": "13:15:00",
-              "likes": 2
-            }
-          ]
+            "nombre": "Usuario123",
+            "imagen": "https://ejemplo.com/imagen_usuario.jpg",
+            "comentarios": [
+                {
+                    "id": "ID1636958582416",
+                    "contenido": "¡Esto es un gran post!",
+                    "fecha_publicacion": "2023-11-02",
+                    "hora_publicacion": "12:30:00",
+                    "likes": 10,
+                    "subcomentarios": [
+                        {
+                            "id": "ID1636958676511",
+                            "contenido": "Estoy de acuerdo, ¡muy informativo!",
+                            "fecha_publicacion": "2023-11-02",
+                            "hora_publicacion": "13:00:00",
+                            "likes": 5,
+                            "subcomentarios": [
+                                {
+                                    "id": "ID1636958713831",
+                                    "contenido": "¡Gracias por tu comentario!",
+                                    "fecha_publicacion": "2023-11-02",
+                                    "hora_publicacion": "13:15:00",
+                                    "likes": 2,
+                                    "subcomentarios": null,
+                                    "usuario": {
+                                        "nombre": "Usuario123",
+                                        "imagen": "https://ejemplo.com/imagen_usuario.jpg"
+                                    }
+                                }
+                            ],
+                            "usuario": {
+                                "nombre": "Comentador456",
+                                "imagen": "https://ejemplo.com/imagen_comentador.jpg"
+                            }
+                        },
+                        {
+                            "id": "ID1636958726959",
+                            "contenido": "No estoy de acuerdo, creo que hay errores.",
+                            "fecha_publicacion": "2023-11-02",
+                            "hora_publicacion": "14:00:00",
+                            "likes": 3,
+                            "subcomentarios": null,
+                            "usuario": {
+                                "nombre": "OtroComentador",
+                                "imagen": "https://ejemplo.com/imagen_otrocomentador.jpg"
+                            }
+                        }
+                    ],
+                    "usuario": null
+                },
+                {
+                    "id": "ID1636958745422",
+                    "contenido": "Este artículo es muy útil, ¡gracias!",
+                    "fecha_publicacion": "2023-11-02",
+                    "hora_publicacion": "15:00:00",
+                    "likes": 8,
+                    "subcomentarios": null,
+                    "usuario": null
+                }
+            ]
         },
         {
-          "id": "ID1636958726959",
-          "usuario": {
-            "nombre": "OtroComentador",
-            "imagen": "https://ejemplo.com/imagen_otrocomentador.jpg"
-          },
-          "contenido": "No estoy de acuerdo, creo que hay errores.",
-          "fecha_publicacion": "2023-11-02",
-          "hora_publicacion": "14:00:00",
-          "likes": 3
+            "nombre": "NuevoUsuario",
+            "imagen": "https://ejemplo.com/imagen_nuevousuario.jpg",
+            "comentarios": [
+                {
+                    "id": "ID1636958800000",
+                    "contenido": "¡Hola! Soy un nuevo usuario.",
+                    "fecha_publicacion": "2023-11-03",
+                    "hora_publicacion": "10:00:00",
+                    "likes": 5,
+                    "subcomentarios": null,
+                    "usuario": null
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "ID1636958745422",
-      "contenido": "Este artículo es muy útil, ¡gracias!",
-      "fecha_publicacion": "2023-11-02",
-      "hora_publicacion": "15:00:00",
-      "likes": 8
-    }
-  ]
+    ]
 }

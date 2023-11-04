@@ -1,10 +1,13 @@
 package com.backend.foro.bean;
 
+import java.util.List;
+
 public class Usuario {
 	public String nombre;
     public String imagen;
+    public List<Comentario> comentarios;
 
-    //Getters y setters
+	//Getters y setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -17,4 +20,10 @@ public class Usuario {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}   
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
 }
