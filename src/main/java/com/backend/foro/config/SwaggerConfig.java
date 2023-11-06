@@ -25,6 +25,7 @@ public class SwaggerConfig {
 				.apiInfo(getApiInfo());
 	}
 	
+	//Información dentro de la documentación de Swagger Ui
 	private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
                 .title("Forum Service API")

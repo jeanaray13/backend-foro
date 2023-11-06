@@ -3,6 +3,8 @@ package com.backend.foro.bean;
 import java.util.List;
 
 public class Usuario {
+	
+	//Variables
 	public String nombre;
     public String imagen;
     public List<Comentario> comentarios;

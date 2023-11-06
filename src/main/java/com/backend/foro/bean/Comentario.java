@@ -3,6 +3,8 @@ package com.backend.foro.bean;
 import java.util.List;
 
 public class Comentario {
+	
+	//Variables
 	public String id;
 	public String contenido;
 	public String fecha_publicacion;
@@ -55,7 +57,6 @@ public class Comentario {
 		this.usuario = usuario;
 	}
 	
-	public Comentario() {
-		
-	}
+	//Constructor
+	public Comentario() {}
 }
