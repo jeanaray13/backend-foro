@@ -33,11 +33,15 @@ https://github.com/jeanaray13/backend-foro/blob/main/pom.xml
 
 ## Ejecución
 
-1. Compilar el proyecto:
+1. Clonar el proyecto:
+
+`git clone https://github.com/jeanaray13/backend-foro.git`
+
+2. Compilar el proyecto dentro de la carpeta "backend-foro":
    
 `mvn clean install` o `mvnm clean install`
 
-2. Ejecutar la aplicación:
+2. Ejecutar la aplicación dentro de la carpeta "backend-foro":
 
 `java -jar target/backend-foro-0.0.1-SNAPSHOT.jar`
 
